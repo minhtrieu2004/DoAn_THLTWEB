@@ -29,7 +29,7 @@ $is_logged_in = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#!">SHOP TT</a>
+            <a class="navbar-brand" href="../public/item_list.php">SHOP TT</a>
             <button
                 class="navbar-toggler"
                 type="button"
@@ -55,7 +55,7 @@ $is_logged_in = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
                             data-bs-toggle="dropdown"
                             aria-expanded="false">Shop</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">All Products</a></li>
+                            <li><a class="dropdown-item" href="../public/item_list.php">All Products</a></li>
                             <li>
                                 <hr class="dropdown-divider" />
                             </li>
