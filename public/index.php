@@ -1,6 +1,9 @@
 <!-- Nav -->
 <?php
 include '../includes/header.php';
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+  echo "<div class='container mt-3'><div class='alert alert-success'>Xin chào, " . $_SESSION['username'] . "! Bạn đã đăng nhập thành công.</div></div>";
+}
 ?>
 <!-- Header-->
 <header class="bg-dark py-5">

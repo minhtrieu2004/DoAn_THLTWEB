@@ -1,0 +1,114 @@
+[2025-11-29 02:53:41] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => password123
+)
+
+[2025-11-29 02:53:55] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => password123
+)
+
+[2025-11-29 02:55:28] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => password123
+)
+
+[2025-11-29 02:57:12] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => password123
+)
+
+[2025-11-29 03:17:14] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => password123
+)
+
+[2025-11-29 03:19:39] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => 123456
+)
+
+[2025-11-29 03:20:00] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => 123456
+)
+
+[2025-11-29 03:21:15] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => 123456
+)
+
+[2025-11-29 03:21:43] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => $2y$10$T8Z.V7.6T9G0Q3g5G2I8O0y5I.o0I.U5J.Z9J.K4U.B3d2A1Y4h3S
+)
+
+[2025-11-29 03:28:35] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => 123456
+)
+
+[2025-11-29 03:36:24] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => 123456
+)
+
+[2025-11-29 03:41:24] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => 123456
+)
+
+[2025-11-29 03:48:28] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => 123456
+)
+
+[2025-11-29 03:51:30] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => 123456
+)
+
+[2025-11-29 04:04:15] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => 123456
+)
+
+[2025-11-29 04:04:41] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => 123456
+)
+
+[2025-11-29 04:07:34] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => 123456
+)
+
+[2025-11-29 04:09:11] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => 123456
+)
+
+[2025-11-29 04:13:14] ::1 METHOD=POST POST=Array
+(
+    [username] => user1
+    [password] => trieu2004
+)
+

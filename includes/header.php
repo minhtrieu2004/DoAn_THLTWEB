@@ -1,3 +1,9 @@
+<?php
+session_start();
+// Đảm bảo session_start() đã được gọi ở đầu file header.php
+$is_logged_in = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +25,7 @@
     <link href="../assets/css/styles.css" rel="stylesheet" />
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
@@ -58,13 +64,30 @@
                         </ul>
                     </li>
                 </ul>
-                <a href="../public/cart.php" class="btn btn-outline-dark d-flex align-items-center">
-                    <i class="bi-cart-fill me-1"></i>
-                    Cart
-                    <span id="card-count" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                <div class="d-flex align-items-center">
+                    <?php if ($is_logged_in): ?>
 
+                        <a href="profile.php" class="btn btn-primary me-2 fw-bold" style="background-color: #5c4942ff; border-color: #cd7759;">
+                            <i class="bi bi-person-fill"></i> Hồ sơ (<?php echo htmlspecialchars($_SESSION['username']); ?>)
+                        </a>
 
-                </a>
+                        <a href="logout.php" class="btn btn-danger fw-bold me-2" style="background-color: #957d77ff;">
+                            <i class="bi bi-box-arrow-right me-2"></i> Đăng xuất
+                        </a>
+
+                    <?php else: ?>
+
+                        <a href="login.php" class="btn btn-primary fw-bold me-2" style="background-color: #413531ff; border-color: #cd7759;">
+                            <i class="bi bi-box-arrow-in-right"></i> Đăng nhập
+                        </a>
+
+                    <?php endif; ?>
+                    <a href="../public/cart.php" class="btn btn-outline-dark d-flex align-items-center">
+                        <i class="bi-cart-fill me-1"></i>
+                        Cart
+                        <span id="card-count" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
