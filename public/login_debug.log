@@ -112,3 +112,15 @@
     [password] => trieu2004
 )
 
+[2025-11-29 13:21:49] ::1 METHOD=POST POST=Array
+(
+    [username] => huynhquangthien230804@gmail.com
+    [password] => gggg
+)
+
+[2025-11-29 13:23:32] ::1 METHOD=POST POST=Array
+(
+    [username] => anhhobao123
+    [password] => hqthien230804
+)
+
