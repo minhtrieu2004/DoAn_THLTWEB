@@ -9,6 +9,8 @@ $current_username = $is_logged_in ? ($_SESSION['username'] ?? '') : '';
 // Thiết lập biến vai trò
 $user_role = $is_logged_in ? ($_SESSION['role'] ?? 'user') : null;
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,12 +62,17 @@ $user_role = $is_logged_in ? ($_SESSION['role'] ?? 'user') : null;
                             data-bs-toggle="dropdown"
                             aria-expanded="false">Shop</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="../public/item_list.php">All Products</a></li>
+                            <li><a class="dropdown-item" href="../public/item_list.php">Tất cả sản phẩm</a></li>
                             <li>
                                 <hr class="dropdown-divider" />
                             </li>
-                            <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                            <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                            <!-- danh sách danh mục  sản phẩm-->
+                            <li><a class="dropdown-item" href="../public/item_list.php?category=1">Vợt</a></li>
+                            <li><a class="dropdown-item" href="../public/item_list.php?category=2">Quần</a></li>
+                            <li><a class="dropdown-item" href="../public/item_list.php?category=3">Áo</a></li>
+                            <li><a class="dropdown-item" href="../public/item_list.php?category=4">Giày</a></li>
+                            <li><a class="dropdown-item" href="../public/item_list.php?category=5">Túi</a></li>
+                            <li><a class="dropdown-item" href="../public/item_list.php?category=6">Phụ kiện</a></li>
                         </ul>
                     </li>
                 </ul>

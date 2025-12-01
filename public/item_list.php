@@ -11,19 +11,41 @@ $limit = 9;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 if ($page < 1) $page = 1;
 
+// Lọc theo category nếu có
+$category_id = null;
+$where = '';
+$params = [];
+if (isset($_GET['category']) && is_numeric($_GET['category'])) {
+    $category_id = (int)$_GET['category'];
+    $where = 'WHERE category_id = :cat';
+    $params[':cat'] = $category_id;
+}
+
 // Tính vị trí bắt đầu
 $offset = ($page - 1) * $limit;
 
-// Lấy danh sách sản phẩm
-$sql = "SELECT product_id, name, image_main, price FROM products LIMIT :limit OFFSET :offset";
+// Lấy danh sách sản phẩm (có thể có WHERE)
+$sql = "SELECT product_id, name, image_main, price FROM products " . $where . " LIMIT :limit OFFSET :offset";
 $stmt = $pdo->prepare($sql);
+foreach ($params as $k => $v) {
+    $stmt->bindValue($k, $v, PDO::PARAM_INT);
+}
 $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
 $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
 $stmt->execute();
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Lấy tổng số sản phẩm để tính số trang
-$total = (int)$pdo->query("SELECT COUNT(*) FROM products")->fetchColumn();
+// Lấy tổng số sản phẩm để tính số trang (có filter nếu có)
+if ($where) {
+    $count_sql = "SELECT COUNT(*) FROM products WHERE category_id = :cat";
+    $count_stmt = $pdo->prepare($count_sql);
+    $count_stmt->bindValue(':cat', $category_id, PDO::PARAM_INT);
+    $count_stmt->execute();
+    $total = (int)$count_stmt->fetchColumn();
+} else {
+    $total = (int)$pdo->query("SELECT COUNT(*) FROM products")->fetchColumn();
+}
+
 $totalPages = ($total > 0) ? ceil($total / $limit) : 1;
 
 ?>
@@ -73,8 +95,8 @@ $totalPages = ($total > 0) ? ceil($total / $limit) : 1;
     </div>
 </section>
 
-<!-- JS Add to Cart (giống item_list, cập nhật cả id hiển thị số lượng có thể khác tên) -->
-<script>
+<!-- //  JS Add to Cart (giống item_list, cập nhật cả id hiển thị số lượng có thể khác tên)  -->
+<!-- <script>
 function addToCart(name, price) {
         fetch('add_cart.php', {
                 method: 'POST',
@@ -94,7 +116,7 @@ function addToCart(name, price) {
         })
         .catch(error => console.error('Lỗi:', error));
 }
-</script>
+</script> -->
 
 <?php include '../includes/footer.php'; ?>
 
