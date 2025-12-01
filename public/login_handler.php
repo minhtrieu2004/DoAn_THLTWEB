@@ -5,7 +5,7 @@ require_once '../config/db.php';
 
 // Kiểm tra yêu cầu POST từ form
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: login.php'); // Chuyển về trang đăng nhập nếu không phải POST
+    header('Location: ../public/login.php'); // Chuyển về trang đăng nhập nếu không phải POST
     exit();
 }
 
@@ -22,13 +22,13 @@ file_put_contents(__DIR__ . '/login_debug.log', $debug, FILE_APPEND | LOCK_EX);
 // Kiểm tra dữ liệu rỗng
 if (empty($username_or_email) || empty($password)) {
     $_SESSION['error'] = "Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu.";
-    header('Location: login.php');
+    header('Location: ../public/login.php');
     exit();
 }
 
 // 2. Chuẩn bị truy vấn (Tìm người dùng bằng username/email)
 // Sử dụng Prepared Statement để ngăn SQL Injection
-$sql = "SELECT user_id, username, password AS password_hash, email FROM users WHERE username = :user_name OR email = :user_email LIMIT 1";
+$sql = "SELECT user_id, username, password AS password_hash, email, role FROM users WHERE username = :user_name OR email = :user_email LIMIT 1";
 $stmt = $pdo->prepare($sql);
 
 $stmt->execute([
@@ -48,10 +48,17 @@ if ($user) {
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['loggedin'] = true;
+        $_SESSION['role'] = $user['role'];
 
+        if ($user['role'] === 'admin') {
+            header("Location: ../admin/admin_products.php");
+            exit;
+        }
         // Chuyển hướng đến trang chủ hoặc trang dashboard
-        header('Location: index.php');
-        exit();
+        else {
+            header("Location: ../public/index.php");
+            exit;
+        }
     } else {
         // Mật khẩu không đúng
         $_SESSION['error'] = "Mật khẩu không chính xác.";
@@ -62,5 +69,5 @@ if ($user) {
 }
 
 // Nếu có lỗi, lưu thông báo lỗi và quay lại trang đăng nhập
-header('Location: login.php');
+header('Location: ../public/login.php');
 exit();

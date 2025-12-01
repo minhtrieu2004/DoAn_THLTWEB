@@ -30,11 +30,11 @@ if (!$user_data) {
     <hr>
     <div class="row">
         <div class="col-md-6">
-            <p><strong>Tên đăng nhập:</strong> <?php echo htmlspecialchars($user_data['username']); ?></p>
-            <p><strong>Email:</strong> <?php echo htmlspecialchars($user_data['email']); ?></p>
-            <p><strong>Điện thoại:</strong> <?php echo htmlspecialchars($user_data['phone']); ?></p>
-            <p><strong>Địa chỉ:</strong> <?php echo htmlspecialchars($user_data['address']); ?></p>
-            <p><strong>Ngày tham gia:</strong> <?php echo date("d/m/Y", strtotime($user_data['created_at'])); ?></p>
+            <p><strong>Tên đăng nhập:</strong> <?php echo htmlspecialchars($user_data['username'] ?? ''); ?></p>
+            <p><strong>Email:</strong> <?php echo htmlspecialchars($user_data['email'] ?? ''); ?></p>
+            <p><strong>Điện thoại:</strong> <?php echo htmlspecialchars($user_data['phone'] ?? ''); ?></p>
+            <p><strong>Địa chỉ:</strong> <?php echo htmlspecialchars($user_data['address']  ?? ''); ?></p>
+            <p><strong>Ngày tham gia:</strong> <?php echo date("d/m/Y", strtotime($user_data['created_at'] ?? '')); ?></p>
         </div>
     </div>
 </div>
