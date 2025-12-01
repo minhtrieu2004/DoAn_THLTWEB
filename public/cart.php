@@ -16,11 +16,12 @@ include '../includes/header.php';
                                 <th scope="col" style="width: 20%;">Tạm Tính</th>
                             </tr>
                         </thead>
-                        <tbody id="cart-items"
+                        <tbody id="cart-items">
                             <?php
-                            //viet php o day
+                                //code o day
+                                // Dữ liệu được load từ script.js 
                             ?>
-                            </tbody>
+                        </tbody>
                     </table>
 
                 </div>
