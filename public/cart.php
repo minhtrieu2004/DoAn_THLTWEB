@@ -17,10 +17,7 @@ include '../includes/header.php';
                             </tr>
                         </thead>
                         <tbody id="cart-items">
-                            <?php
-                                //code o day
-                                // Dữ liệu được load từ script.js 
-                            ?>
+                            <!-- Cart items loaded by JS loadCart() -->
                         </tbody>
                     </table>
 
@@ -60,8 +57,6 @@ include '../includes/header.php';
     </div>
 
 </section>
-
-
 <?php
 include '../includes/footer.php';
 ?>

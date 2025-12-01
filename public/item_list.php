@@ -1,4 +1,3 @@
-
 <?php
 // Hiển thị giao diện giống item_list.php nhưng lấy dữ liệu từ DB (PDO)
 include '../includes/header.php';
@@ -59,7 +58,7 @@ $totalPages = ($total > 0) ? ceil($total / $limit) : 1;
             <?php if (count($products) > 0): ?>
                 <?php foreach ($products as $row): ?>
                     <div class="col-md-4 mb-5">
-                        <div class="card h-100">
+                        <div class="card h-100" style="cursor: pointer;" onclick="viewProductDetail(<?= (int)$row['product_id'] ?>)">
                             <img class="card-img-top" src="../<?= htmlspecialchars($row['image_main']) ?>" alt="<?= htmlspecialchars($row['name']) ?>" />
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -68,7 +67,7 @@ $totalPages = ($total > 0) ? ceil($total / $limit) : 1;
                                 </div>
                             </div>
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center">
-                                <button class="btn btn-outline-dark mt-auto" onclick="addToCart('<?= htmlspecialchars($row['name'], ENT_QUOTES) ?>', <?= (float)$row['price'] ?>)">Add to cart</button>
+                                <button class="btn btn-outline-dark mt-auto" onclick="event.stopPropagation(); addToCart('<?= htmlspecialchars($row['name'], ENT_QUOTES) ?>', <?= (float)$row['price'] ?>)">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -81,7 +80,7 @@ $totalPages = ($total > 0) ? ceil($total / $limit) : 1;
         <!-- Phân trang -->
         <div class="d-flex justify-content-center mt-4">
             <?php if ($page > 1): ?>
-                <a class="btn btn-outline-secondary me-2" href="?page=<?= $page-1 ?>">Previous</a>
+                <a class="btn btn-outline-secondary me-2" href="?page=<?= $page - 1 ?>">Previous</a>
             <?php endif; ?>
 
             <?php for ($i = 1; $i <= $totalPages; $i++): ?>
@@ -89,7 +88,7 @@ $totalPages = ($total > 0) ? ceil($total / $limit) : 1;
             <?php endfor; ?>
 
             <?php if ($page < $totalPages): ?>
-                <a class="btn btn-outline-secondary" href="?page=<?= $page+1 ?>">Next</a>
+                <a class="btn btn-outline-secondary" href="?page=<?= $page + 1 ?>">Next</a>
             <?php endif; ?>
         </div>
     </div>
@@ -121,4 +120,5 @@ function addToCart(name, price) {
 <?php include '../includes/footer.php'; ?>
 
 </body>
+
 </html>
