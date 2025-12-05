@@ -52,7 +52,7 @@ $user_role = $is_logged_in ? ($_SESSION['role'] ?? 'user') : null;
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="../public/index.php">Home</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../public/about.php">About</a></li>
                     <li class="nav-item dropdown">
                         <a
                             class="nav-link dropdown-toggle"

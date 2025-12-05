@@ -8,6 +8,7 @@
 
 // script.js
 
+
 // Nhảy đến trang chi tiết sản phẩm
 function viewProductDetail(productId) {
   window.location.href = `product_detail.php?id=${productId}`;
@@ -119,8 +120,31 @@ function md5(str) {
   }, 0);
 }
 
+// Thanh trượt chính: tự động xoay hình ảnh mỗi 5 giây
+function initHeroSlider() {
+  const slides = document.querySelectorAll(".hero-slider img.slide");
+  if (slides.length === 0) return;
+  
+  let currentIndex = 0;
+  
+  const showSlide = () => {
+    slides.forEach((slide) => slide.classList.remove("active"));
+    slides[currentIndex].classList.add("active");
+  };
+  
+
+  showSlide();
+  
+  // Xoay mỗi 5 giây
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    showSlide();
+  }, 5000);
+}
+
 // Load ngay khi mở trang
 document.addEventListener("DOMContentLoaded", function () {
   updateCartCount();
   loadCart();
+  initHeroSlider();
 });
