@@ -1374,3 +1374,113 @@
 
 )
 
+[2025-12-06 04:50:00] POST: Array
+(
+    [name] => Vợt cầu lông Victor Auraspeed HSplus VBC
+    [price] => 5000000
+)
+ SID: 7ncmotgf4il85vta71glkbu47u
+  CART after: Array
+(
+    [Vợt cầu lông Victor Auraspeed HSplus VBC] => Array
+        (
+            [name] => Vợt cầu lông Victor Auraspeed HSplus VBC
+            [price] => 5000000
+            [quantity] => 1
+        )
+
+)
+
+[2025-12-06 04:50:03] POST: Array
+(
+    [name] => Vợt cầu lông Lining Axforce 100 II Gen 2 Chính hãng
+    [price] => 5700000
+)
+ SID: 7ncmotgf4il85vta71glkbu47u
+  CART after: Array
+(
+    [Vợt cầu lông Victor Auraspeed HSplus VBC] => Array
+        (
+            [name] => Vợt cầu lông Victor Auraspeed HSplus VBC
+            [price] => 5000000
+            [quantity] => 1
+        )
+
+    [Vợt cầu lông Lining Axforce 100 II Gen 2 Chính hãng] => Array
+        (
+            [name] => Vợt cầu lông Lining Axforce 100 II Gen 2 Chính hãng
+            [price] => 5700000
+            [quantity] => 1
+        )
+
+)
+
+[2025-12-06 04:50:04] POST: Array
+(
+    [name] => Vợt cầu lông Lining Halbertec Motor Pro Chính hãng
+    [price] => 2150000
+)
+ SID: 7ncmotgf4il85vta71glkbu47u
+  CART after: Array
+(
+    [Vợt cầu lông Victor Auraspeed HSplus VBC] => Array
+        (
+            [name] => Vợt cầu lông Victor Auraspeed HSplus VBC
+            [price] => 5000000
+            [quantity] => 1
+        )
+
+    [Vợt cầu lông Lining Axforce 100 II Gen 2 Chính hãng] => Array
+        (
+            [name] => Vợt cầu lông Lining Axforce 100 II Gen 2 Chính hãng
+            [price] => 5700000
+            [quantity] => 1
+        )
+
+    [Vợt cầu lông Lining Halbertec Motor Pro Chính hãng] => Array
+        (
+            [name] => Vợt cầu lông Lining Halbertec Motor Pro Chính hãng
+            [price] => 2150000
+            [quantity] => 1
+        )
+
+)
+
+[2025-12-06 04:50:05] POST: Array
+(
+    [name] => Vợt cầu lông Victor DriveX 12 ZSW
+    [price] => 6000000
+)
+ SID: 7ncmotgf4il85vta71glkbu47u
+  CART after: Array
+(
+    [Vợt cầu lông Victor Auraspeed HSplus VBC] => Array
+        (
+            [name] => Vợt cầu lông Victor Auraspeed HSplus VBC
+            [price] => 5000000
+            [quantity] => 1
+        )
+
+    [Vợt cầu lông Lining Axforce 100 II Gen 2 Chính hãng] => Array
+        (
+            [name] => Vợt cầu lông Lining Axforce 100 II Gen 2 Chính hãng
+            [price] => 5700000
+            [quantity] => 1
+        )
+
+    [Vợt cầu lông Lining Halbertec Motor Pro Chính hãng] => Array
+        (
+            [name] => Vợt cầu lông Lining Halbertec Motor Pro Chính hãng
+            [price] => 2150000
+            [quantity] => 1
+        )
+
+    [Vợt cầu lông Victor DriveX 12 ZSW] => Array
+        (
+            [name] => Vợt cầu lông Victor DriveX 12 ZSW
+            [price] => 6000000
+            [quantity] => 1
+        )
+
+)
+
