@@ -82,13 +82,19 @@ if (isset($_SESSION['success'])): ?>
                         echo "<td>" . $formatted_price . "</td>"; // Hiển thị Giá đã format
                         echo "<td>" . htmlspecialchars($stock) . "</td>";
                         // Cắt ngắn Mô tả
-                        echo "<td>" . htmlspecialchars(mb_substr($description, 0, 50, 'UTF-8')) . "...</td>";
+                        echo "<td>" . htmlspecialchars(mb_substr($description ?? '', 0, 50, 'UTF-8')) . "...</td>";
                         echo "<td>";
                         // Nút XEM;
-                        echo "<a href='product-detail.php?id={$product_id}' class='btn btn-sm btn-info'>Xem</a>";
-                        // ... (Các nút Sửa, Xóa khác)
-                        echo "</td>";
-                        echo "</tr>";
+                        echo "<a href='../public/product_detail.php?id={$product_id}' class='btn btn-sm btn-info'>Xem</a>";
+                        // Nút Sửa
+                        echo "<button class='btn btn-sm btn-warning me-1 edit-product-btn' 
+                                                    data-bs-toggle='modal' 
+                                                    data-bs-target='#productModal' 
+                                                    data-id='{$product_id}'>Sửa</button>";
+
+                        // Nút XÓA (Sử dụng data-id cho JS xử lý xóa)
+                        echo "<button class='btn btn-sm btn-danger delete-product-btn' 
+                                                    data-id='{$product_id}'>Xóa</button>";
                     }
                 } else {
                     echo "<tr><td colspan='6' class='text-center'>Chưa có sản phẩm nào.</td></tr>";
@@ -164,3 +170,4 @@ if (isset($_SESSION['success'])): ?>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/scripts.js"></script>
