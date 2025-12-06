@@ -1,9 +1,7 @@
 <!-- Nav -->
 <?php
 include '../includes/header.php';
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-  echo "<div class='container mt-3'><div class='alert alert-success'>Xin chào, " . $_SESSION['username'] . "! Bạn đã đăng nhập thành công.</div></div>";
-}
+
 ?>
 <?php
 require '../config/db.php';
@@ -23,13 +21,14 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <!-- Section-->
- <section class="py-5">
+<section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="fw-bolder mb-4 bi bi-star-fill">Sản Phẩm Mới </h2>
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-
             <?php foreach ($products as $row): ?>
                 <div class="col mb-5">
-                    <div class="card h-100" style="cursor: pointer;" onclick="viewProductDetail(<?= (int)$row['product_id'] ?>)" >
+
+                    <div class="card h-100" style="cursor: pointer;" onclick="viewProductDetail(<?= (int)$row['product_id'] ?>)">
 
                         <!-- Hình ảnh -->
                         <img class="card-img-top" src="../<?= htmlspecialchars($row['image_main']) ?>" alt="<?= htmlspecialchars($row['name']) ?>">
@@ -38,16 +37,14 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <h5 class="fw-bolder"><?= $row['name'] ?></h5>
-                                $<?= $row['price'] ?>
+                                <?= number_format($row['price'], 0, ',', '.') ?> VND
                             </div>
                         </div>
 
                         <!-- View  -->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <div class="text-center">
-                              <button class="btn btn-outline-dark mt-auto" 
-                              onclick="event.stopPropagation(); 
-                              addToCart('<?= htmlspecialchars($row['name'], ENT_QUOTES) ?>', <?= (float)$row['price'] ?>)">Add to cart </button>
+                                <button class="btn btn-outline-dark mt-auto" onclick="event.stopPropagation(); addToCart('<?= htmlspecialchars($row['name'], ENT_QUOTES) ?>', <?= (float)$row['price'] ?>)">Add to cart</button>
                             </div>
                         </div>
                     </div>

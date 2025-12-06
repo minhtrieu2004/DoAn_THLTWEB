@@ -14,17 +14,43 @@ if ($page < 1) $page = 1;
 $category_id = null;
 $where = '';
 $params = [];
+
 if (isset($_GET['category']) && is_numeric($_GET['category'])) {
     $category_id = (int)$_GET['category'];
     $where = 'WHERE category_id = :cat';
     $params[':cat'] = $category_id;
 }
 
+// Xử lý sắp xếp
+$sort = isset($_GET['sort']) ? $_GET['sort'] : '';
+$orderBy = "ORDER BY created_at  DESC"; // mặc định: mới --> cũ nhất
+//sắp xếp cũ --> mới
+if ($sort == "oldest") {
+    $orderBy = "ORDER BY created_at  ASC";
+}
+//sắp xếp tăng dần
+elseif ($sort == "price_asc") {
+    $orderBy = "ORDER BY price ASC";
+}
+//sắp xếp giảm dần
+elseif ($sort == "price_desc") {
+    $orderBy = "ORDER BY price DESC";
+}
+
+// giữ lại sắp xếp khi sang trang (phân trang)
+$extraQuery = "";
+if (!empty($_GET['sort'])) {
+    $extraQuery .= "&sort=" . urlencode($_GET['sort']);
+}
+if (!empty($_GET['category'])) {
+    $extraQuery .= "&category=" . urlencode($_GET['category']);
+}
+
 // Tính vị trí bắt đầu
 $offset = ($page - 1) * $limit;
 
 // Lấy danh sách sản phẩm (có thể có WHERE)
-$sql = "SELECT product_id, name, image_main, price FROM products " . $where . " LIMIT :limit OFFSET :offset";
+$sql = "SELECT * FROM products " . $where . " " . $orderBy . " LIMIT :limit OFFSET :offset";
 $stmt = $pdo->prepare($sql);
 foreach ($params as $k => $v) {
     $stmt->bindValue($k, $v, PDO::PARAM_INT);
@@ -47,9 +73,26 @@ if ($where) {
 
 $totalPages = ($total > 0) ? ceil($total / $limit) : 1;
 
+
 ?>
 
 
+<!-- Bộ lọc -->
+<div class="container px-5 mt-5 mb-1 text-end">
+    <form method="GET" class="d-inline-block">
+        <?php if ($category_id): ?>
+            <input type="hidden" name="category" value="<?= $category_id ?>">
+        <?php endif; ?>
+
+        <select name="sort" class="form-select d-inline-block w-auto" onchange="this.form.submit()">
+            <option value="">-- Sắp xếp --</option>
+            <option value="newest" <?= isset($_GET['sort']) && $_GET['sort'] == 'newest' ? 'selected' : '' ?>>Mới nhất</option>
+            <option value="oldest" <?= isset($_GET['sort']) && $_GET['sort'] == 'oldest' ? 'selected' : '' ?>>Cũ nhất</option>
+            <option value="price_asc" <?= isset($_GET['sort']) && $_GET['sort'] == 'price_asc' ? 'selected' : '' ?>>Giá tăng dần</option>
+            <option value="price_desc" <?= isset($_GET['sort']) && $_GET['sort'] == 'price_desc' ? 'selected' : '' ?>>Giá giảm dần</option>
+        </select>
+    </form>
+</div>
 
 <!-- Section: danh sách sản phẩm -->
 <section class="py-5">
@@ -63,13 +106,11 @@ $totalPages = ($total > 0) ? ceil($total / $limit) : 1;
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <h5 class="fw-bolder"><?= htmlspecialchars($row['name']) ?></h5>
-                                    <?= number_format($row['price'], 0, ',', '.') ?> đ
+                                    <?= number_format($row['price'], 0, ',', '.') ?> VND
                                 </div>
                             </div>
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center">
-                                <button class="btn btn-outline-dark mt-auto" 
-                                onclick="event.stopPropagation(); 
-                                addToCart('<?= htmlspecialchars($row['name'], ENT_QUOTES) ?>', <?= (float)$row['price'] ?>)">Add to cart</button>
+                                <button class="btn btn-outline-dark mt-auto" onclick="event.stopPropagation(); addToCart('<?= htmlspecialchars($row['name'], ENT_QUOTES) ?>', <?= (float)$row['price'] ?>)">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -82,42 +123,20 @@ $totalPages = ($total > 0) ? ceil($total / $limit) : 1;
         <!-- Phân trang -->
         <div class="d-flex justify-content-center mt-4">
             <?php if ($page > 1): ?>
-                <a class="btn btn-outline-secondary me-2" href="?page=<?= $page - 1 ?>">Previous</a>
+                <a class="btn btn-outline-secondary me-2" href="?page=<?= $page - 1 ?><?= $extraQuery ?>">Previous</a>
             <?php endif; ?>
 
             <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                <a class="btn <?= ($i == $page) ? 'btn-dark' : 'btn-outline-dark' ?> me-2" href="?page=<?= $i ?>"><?= $i ?></a>
+                <a class="btn <?= ($i == $page) ? 'btn-dark' : 'btn-outline-dark' ?> me-2" href="?page=<?= $i ?><?= $extraQuery ?>"><?= $i ?></a>
             <?php endfor; ?>
 
             <?php if ($page < $totalPages): ?>
-                <a class="btn btn-outline-secondary" href="?page=<?= $page + 1 ?>">Next</a>
+                <a class="btn btn-outline-secondary" href="?page=<?= $page + 1 ?><?= $extraQuery ?>">Next</a>
             <?php endif; ?>
         </div>
     </div>
 </section>
 
-<!-- //  JS Add to Cart (giống item_list, cập nhật cả id hiển thị số lượng có thể khác tên)  -->
-<!-- <script>
-function addToCart(name, price) {
-        fetch('add_cart.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `name=${encodeURIComponent(name)}&price=${price}`
-        })
-        .then(response => response.json())
-        .then(data => {
-                if (data.success) {
-                        alert('Đã thêm vào giỏ hàng!');
-                        // Cập nhật số lượng hiển thị (có thể là id 'card-count' hoặc 'cartCount')
-                        const el1 = document.getElementById('card-count');
-                        const el2 = document.getElementById('cartCount');
-                        if (el1) el1.textContent = data.totalQuantity;
-                        if (el2) el2.textContent = data.totalQuantity;
-                }
-        })
-        .catch(error => console.error('Lỗi:', error));
-}
-</script> -->
 
 <?php include '../includes/footer.php'; ?>
 

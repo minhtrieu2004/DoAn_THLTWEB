@@ -3,7 +3,7 @@ session_start();
 require_once '../config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: register.php');
+    header('Location: ../public/register.php');
     exit();
 }
 
@@ -31,7 +31,7 @@ if (empty($full_name) || empty($username) || empty($email) || empty($password) |
 
 // Nếu có lỗi, quay lại trang đăng ký
 if (isset($_SESSION['error'])) {
-    header('Location: register.php');
+    header('Location: ../public/register.php');
     exit();
 }
 
@@ -43,12 +43,12 @@ try {
 
     if ($stmt_check->rowCount() > 0) {
         $_SESSION['error'] = "Tên đăng nhập hoặc Email này đã được sử dụng.";
-        header('Location: register.php');
+        header('Location: ../public/register.php');
         exit();
     }
 } catch (PDOException $e) {
     $_SESSION['error'] = "Lỗi kiểm tra trùng lặp: " . $e->getMessage();
-    header('Location: register.php');
+    header('Location: ../public/register.php');
     exit();
 }
 
@@ -74,11 +74,11 @@ try {
 
     // Đăng ký thành công
     $_SESSION['success'] = "Đăng ký tài khoản thành công! Vui lòng đăng nhập.";
-    header('Location: login.php');
+    header('Location: ../public/login.php');
     exit();
 } catch (PDOException $e) {
     // Lỗi khi chèn dữ liệu
     $_SESSION['error'] = "Lỗi khi đăng ký: " . $e->getMessage();
-    header('Location: register.php');
+    header('Location: ../public/register.php');
     exit();
 }

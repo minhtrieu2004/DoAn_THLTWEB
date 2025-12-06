@@ -53,11 +53,12 @@ foreach ($_SESSION['cart'] as $k => $item) {
     ];
 }
 
+// Ensure session is written to disk before responding
+session_write_close();
+
 echo json_encode([
     'success' => true,
     'cart' => $items,
     'totalQuantity' => $totalQuantity,
     'totalPrice' => $totalPrice
 ]);
-
-?>

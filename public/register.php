@@ -24,7 +24,7 @@ require_once '../includes/header.php';
                     </div>
 
                     <div class="card-body p-4">
-                        <form action="register_handler.php" method="POST">
+                        <form action="../private/register_handler.php" method="POST">
 
                             <div class="mb-3">
                                 <label for="full_name" class="form-label text-white">Họ và Tên</label>
@@ -49,7 +49,7 @@ require_once '../includes/header.php';
                                 <label for="address" class="form-label text-white">Địa chỉ</label>
                                 <input type="text" class="form-control" id="address" name="address">
                             </div>
-                           
+
                             <div class="mb-3">
                                 <label for="password" class="form-label text-white">Mật khẩu</label>
                                 <input type="password" class="form-control" id="password" name="password" required>

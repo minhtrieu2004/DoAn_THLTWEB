@@ -16,7 +16,7 @@ require_once '../includes/header.php';
         </div>
     <?php endif; ?>
 
-    <form action="login_handler.php" method="post">
+    <form action="../private/login_handler.php" method="post">
 
         <div class="container my-5">
             <div class="row d-flex justify-content-center">

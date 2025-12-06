@@ -42,25 +42,24 @@ $related = $related_stmt->fetchAll(PDO::FETCH_ASSOC);
 
             <!-- Hình ảnh -->
             <div class="col-md-6">
-                <img class="card-img-top mb-5 mb-md-0" 
-                     src="../<?= htmlspecialchars($product['image_main']) ?>" 
-                     alt="<?= htmlspecialchars($product['name']) ?>" />
+                <img class="card-img-top mb-5 mb-md-0"
+                    src="../<?= htmlspecialchars($product['image_main']) ?>"
+                    alt="<?= htmlspecialchars($product['name']) ?>" />
             </div>
 
             <!-- Thông tin -->
             <div class="col-md-6">
-                <div class="small mb-1">SKU: <?= $product['sku'] ?? "N/A" ?></div>
+
                 <h1 class="display-5 fw-bolder"><?= htmlspecialchars($product['name']) ?></h1>
                 <div class="fs-5 mb-5">
-                    <span><?= number_format($product['price'], 0, ',', '.') ?> đ</span>
+                    <span><?= number_format($product['price'], 0, ',', '.') ?> VND</span>
                 </div>
                 <p class="lead"><?= nl2br(htmlspecialchars($product['description'])) ?></p>
 
                 <div class="d-flex">
                     <!-- input ở dưới là nút nhập số lượng -->
                     <!-- <input class="form-control text-center me-3" id="inputQuantity" type="number" value="1" min="1" style="max-width: 3rem" /> -->
-                    <button class="btn btn-outline-dark flex-shrink-0" 
-                            onclick="addToCart('<?= htmlspecialchars($product['name'], ENT_QUOTES) ?>', <?= (float)$product['price'] ?>)">
+                    <button class="btn btn-outline-dark flex-shrink-0" onclick="addToCart('<?= htmlspecialchars($product['name'], ENT_QUOTES) ?>', <?= (float)$product['price'] ?>)">
                         <i class="bi-cart-fill me-1"></i> Add to cart
                     </button>
                 </div>
@@ -84,12 +83,11 @@ $related = $related_stmt->fetchAll(PDO::FETCH_ASSOC);
 
                         <div class="card-body p-4 text-center">
                             <h5 class="fw-bolder"><?= $row['name'] ?></h5>
-                            <?= number_format($row['price'], 0, ',', '.') ?> đ
+                            <?= number_format($row['price'], 0, ',', '.') ?> VND
                         </div>
 
                         <div class="text-center pb-3">
-                            <button class="btn btn-outline-dark mt-auto"
-                                onclick="event.stopPropagation(); addToCart('<?= htmlspecialchars($row['name'], ENT_QUOTES) ?>', <?= (float)$row['price'] ?>)">
+                            <button class="btn btn-outline-dark mt-auto" onclick="event.stopPropagation(); addToCart('<?= htmlspecialchars($row['name'], ENT_QUOTES) ?>', <?= (float)$row['price'] ?>)">
                                 Add to cart
                             </button>
                         </div>

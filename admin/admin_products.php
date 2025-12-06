@@ -2,6 +2,7 @@
 include '../config/db.php';
 include '../includes/header.php';
 
+
 // BƯỚC 1: Xử lý hiển thị danh mục
 try {
     // Tên bảng của bạn là products

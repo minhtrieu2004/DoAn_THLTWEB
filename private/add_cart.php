@@ -4,7 +4,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 // Dev debug: log incoming POST and session
 $debug_log = "[" . date('Y-m-d H:i:s') . "] POST: " . print_r($_POST, true) . " SID: " . session_id() . "\n";
-file_put_contents(__DIR__ . '/add_cart_debug.log', $debug_log, FILE_APPEND | LOCK_EX);
+file_put_contents(__DIR__ . '/../log/add_cart_debug.log', $debug_log, FILE_APPEND | LOCK_EX);
 
 // Nhận dữ liệu từ AJAX (POST)
 $name  = isset($_POST['name']) ? (string)$_POST['name'] : '';
@@ -42,16 +42,23 @@ foreach ($_SESSION['cart'] as $item) {
     $totalQuantity += isset($item['quantity']) ? (int)$item['quantity'] : 0;
 }
 
-// Log cart state for debug
-file_put_contents(__DIR__ . '/add_cart_debug.log', "  CART after: " . print_r($_SESSION['cart'], true) . "\n", FILE_APPEND | LOCK_EX);
+// Tính tổng giá
+$totalPrice = 0;
+foreach ($_SESSION['cart'] as $item) {
+    $totalPrice += (float)$item['price'] * (int)$item['quantity'];
+}
+
+// Log cart state for debug TRƯỚC khi session_write_close()
+file_put_contents(__DIR__ . '/../log/add_cart_debug.log', "  CART after: " . print_r($_SESSION['cart'], true) . "\n", FILE_APPEND | LOCK_EX);
 
 // Ensure session is written to disk before responding
 session_write_close();
 
-// Trả về JSON để JS cập nhật số lượng hiện trên biểu tượng cart
+// Trả về JSON response
 echo json_encode([
     'success' => true,
+    'message' => 'Product added to cart',
+    'cart' => $_SESSION['cart'],
     'totalQuantity' => $totalQuantity,
-    'sessionId' => session_id()
+    'totalPrice' => $totalPrice
 ]);
-exit();
