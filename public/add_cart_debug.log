@@ -1374,3 +1374,102 @@
 
 )
 
+[2025-12-06 07:08:57] POST: Array
+(
+    [name] => Vợt cầu lông Yonex Astrox 100 Tour VA – Chính hãng
+    [price] => 4469000
+)
+ SID: rj21540s5e2u8ihjg8nakhut97
+  CART after: Array
+(
+    [Vợt cầu lông Yonex Astrox 100 Tour VA – Chính hãng] => Array
+        (
+            [name] => Vợt cầu lông Yonex Astrox 100 Tour VA – Chính hãng
+            [price] => 4469000
+            [quantity] => 1
+        )
+
+)
+
+[2025-12-06 07:43:01] POST: Array
+(
+    [name] => Hộp cầu chất lượng cao
+    [price] => 100000
+)
+ SID: rj21540s5e2u8ihjg8nakhut97
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 1
+        )
+
+)
+
+[2025-12-06 07:43:02] POST: Array
+(
+    [name] => Hộp cầu chất lượng cao
+    [price] => 100000
+)
+ SID: rj21540s5e2u8ihjg8nakhut97
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 2
+        )
+
+)
+
+[2025-12-06 07:47:28] POST: Array
+(
+    [name] => Vợt cầu lông Victor DriveX 12 ZSW
+    [price] => 6000000
+)
+ SID: rj21540s5e2u8ihjg8nakhut97
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 2
+        )
+
+    [Vợt cầu lông Victor DriveX 12 ZSW] => Array
+        (
+            [name] => Vợt cầu lông Victor DriveX 12 ZSW
+            [price] => 6000000
+            [quantity] => 1
+        )
+
+)
+
+[2025-12-06 07:47:28] POST: Array
+(
+    [name] => Vợt cầu lông Victor DriveX 12 ZSW
+    [price] => 6000000
+)
+ SID: rj21540s5e2u8ihjg8nakhut97
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 2
+        )
+
+    [Vợt cầu lông Victor DriveX 12 ZSW] => Array
+        (
+            [name] => Vợt cầu lông Victor DriveX 12 ZSW
+            [price] => 6000000
+            [quantity] => 2
+        )
+
+)
+
