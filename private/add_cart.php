@@ -4,9 +4,27 @@ header("Content-Type: application/json; charset=utf-8");
 require "../config/db.php";
 
 if (!isset($_SESSION['user_id'])) {
-    echo json_encode(["success" => false, "message" => "Bạn chưa đăng nhập"]);
+    $product_id = intval($_POST['product_id'] ?? 0);
+
+    // Tạo giỏ guest nếu chưa có
+    if (!isset($_SESSION['cart_guest'])) {
+        $_SESSION['cart_guest'] = [];
+    }
+
+    // Tăng số lượng
+    if (isset($_SESSION['cart_guest'][$product_id])) {
+        $_SESSION['cart_guest'][$product_id]++;
+    } else {
+        $_SESSION['cart_guest'][$product_id] = 1;
+    }
+
+    echo json_encode([
+        "success" => true,
+        "message" => "Đã thêm vào giỏ hàng (guest)"
+    ]);
     exit;
 }
+
 
 $user_id = $_SESSION['user_id'];
 $product_id = intval($_POST['product_id'] ?? 0);

@@ -49,7 +49,56 @@ if ($user) {
         $_SESSION['username'] = $user['username'];
         $_SESSION['loggedin'] = true;
         $_SESSION['role'] = $user['role'];
+        require_once "../private/merge_cart.php";
+        mergeGuestCartToUser($pdo, $user['user_id']);
 
+
+        // ======================================
+        //  MERGE GIỎ HÀNG GUEST → USER
+        // ======================================
+        if (isset($_SESSION['cart_guest']) && !empty($_SESSION['cart_guest'])) {
+
+            $user_id = $user['user_id'];
+
+            // Lấy cart_id user
+            $stmt = $pdo->prepare("SELECT cart_id FROM carts WHERE user_id = ?");
+            $stmt->execute([$user_id]);
+            $cart = $stmt->fetch();
+
+            if (!$cart) {
+                $pdo->prepare("INSERT INTO carts (user_id, created_at) VALUES (?, NOW())")
+                    ->execute([$user_id]);
+                $cart_id = $pdo->lastInsertId();
+            } else {
+                $cart_id = $cart['cart_id'];
+            }
+
+            // Merge từng item từ session
+            foreach ($_SESSION['cart_guest'] as $product_id => $qty) {
+
+                // Check item trong DB
+                $stmt = $pdo->prepare("SELECT cart_item_id, quantity FROM cart_items WHERE cart_id = ? AND product_id = ?");
+                $stmt->execute([$cart_id, $product_id]);
+                $item = $stmt->fetch();
+
+                if ($item) {
+                    // Cộng thêm số lượng
+                    $newQty = $item['quantity'] + $qty;
+                    $pdo->prepare("UPDATE cart_items SET quantity = ? WHERE cart_item_id = ?")
+                        ->execute([$newQty, $item['cart_item_id']]);
+                } else {
+                    // Insert mới
+                    $pdo->prepare("INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (?, ?, ?)")
+                        ->execute([$cart_id, $product_id, $qty]);
+                }
+            }
+
+            // Xóa giỏ guest sau khi merge
+            unset($_SESSION['cart_guest']);
+        }
+        // ======================================
+
+        // Chuyển hướng dựa trên vai trò
         if ($user['role'] === 'admin') {
             header("Location: ../admin/admin_products.php");
             exit;
