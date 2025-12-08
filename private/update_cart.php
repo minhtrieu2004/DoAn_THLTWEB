@@ -1,64 +1,62 @@
 <?php
 session_start();
 header('Content-Type: application/json; charset=utf-8');
+require "../config/db.php";
 
-$action = $_POST['action'] ?? '';
-$name = isset($_POST['name']) ? trim($_POST['name']) : '';
-
-if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
+if (!isset($_SESSION['user_id'])) {
+    echo json_encode(["success" => false, "message" => "Chưa đăng nhập"]);
+    exit;
 }
 
+$user_id = $_SESSION['user_id'];
+$action = $_POST['action'] ?? '';
+$item_id = intval($_POST['item_id'] ?? $_POST['cart_item_id'] ?? 0);
+
+// Lấy cart_id của user
+$stmt = $pdo->prepare("SELECT cart_id FROM carts WHERE user_id = ?");
+$stmt->execute([$user_id]);
+$cart = $stmt->fetch();
+
+if (!$cart) {
+    echo json_encode(["success" => false, "message" => "Giỏ hàng không tồn tại"]);
+    exit;
+}
+
+$cart_id = $cart['cart_id'];
+
+// Kiểm tra item thuộc cart của user
+$stmt = $pdo->prepare("SELECT cart_item_id, quantity FROM cart_items WHERE cart_item_id = ? AND cart_id = ?");
+$stmt->execute([$item_id, $cart_id]);
+$item = $stmt->fetch();
+
+if (!$item) {
+    echo json_encode(["success" => false, "message" => "Sản phẩm không tồn tại"]);
+    exit;
+}
+
+// Xử lý action
+$currentQty = $item['quantity'];
 switch ($action) {
     case 'increase':
-        if ($name !== '' && isset($_SESSION['cart'][$name])) {
-            $_SESSION['cart'][$name]['quantity']++;
-        }
+        $newQty = $currentQty + 1;
+        $stmt = $pdo->prepare("UPDATE cart_items SET quantity = ? WHERE cart_item_id = ?");
+        $stmt->execute([$newQty, $item_id]);
         break;
     case 'decrease':
-        if ($name !== '' && isset($_SESSION['cart'][$name])) {
-            $_SESSION['cart'][$name]['quantity']--;
-            if ($_SESSION['cart'][$name]['quantity'] <= 0) {
-                unset($_SESSION['cart'][$name]);
-            }
+        $newQty = $currentQty - 1;
+        if ($newQty <= 0) {
+            $stmt = $pdo->prepare("DELETE FROM cart_items WHERE cart_item_id = ?");
+            $stmt->execute([$item_id]);
+        } else {
+            $stmt = $pdo->prepare("UPDATE cart_items SET quantity = ? WHERE cart_item_id = ?");
+            $stmt->execute([$newQty, $item_id]);
         }
         break;
     case 'remove':
-        // remove entire product (all quantity)
-        if ($name !== '' && isset($_SESSION['cart'][$name])) {
-            unset($_SESSION['cart'][$name]);
-        }
-        break;
-    case 'clear':
-        $_SESSION['cart'] = [];
-        break;
-    default:
-        // unknown action
+        $stmt = $pdo->prepare("DELETE FROM cart_items WHERE cart_item_id = ?");
+        $stmt->execute([$item_id]);
         break;
 }
 
-// Recalculate totals
-$totalQuantity = 0;
-$totalPrice = 0.0;
-$items = [];
-foreach ($_SESSION['cart'] as $k => $item) {
-    $qty = isset($item['quantity']) ? (int)$item['quantity'] : 0;
-    $price = isset($item['price']) ? (float)$item['price'] : 0.0;
-    $totalQuantity += $qty;
-    $totalPrice += $price * $qty;
-    $items[] = [
-        'name' => $item['name'] ?? $k,
-        'price' => $price,
-        'quantity' => $qty
-    ];
-}
-
-// Ensure session is written to disk before responding
-session_write_close();
-
-echo json_encode([
-    'success' => true,
-    'cart' => $items,
-    'totalQuantity' => $totalQuantity,
-    'totalPrice' => $totalPrice
-]);
+echo json_encode(["success" => true, "message" => "Cập nhật thành công"]);
+?>

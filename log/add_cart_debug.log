@@ -418,6 +418,7 @@
 
 )
 
+<<<<<<< HEAD
 [2025-12-06 16:47:43] POST: Array
 (
     [name] => Vợt cầu lông Mizuno Fortius 29 Ultima nội địa
@@ -437,11 +438,77 @@
         (
             [name] => Vợt cầu lông Mizuno Fortius 29 Ultima nội địa
             [price] => 4500000
+=======
+[2025-12-08 07:13:25] POST: Array
+(
+    [name] => Hộp cầu chất lượng cao
+    [price] => 100000
+)
+ SID: ib7283tslu72hg7ire6jf29ufn
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 4
+        )
+
+)
+
+[2025-12-08 07:13:25] POST: Array
+(
+    [name] => Hộp cầu chất lượng cao
+    [price] => 100000
+)
+ SID: ib7283tslu72hg7ire6jf29ufn
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 5
+        )
+
+)
+
+[2025-12-08 07:13:25] POST: Array
+(
+    [name] => Hộp cầu chất lượng cao
+    [price] => 100000
+)
+ SID: ib7283tslu72hg7ire6jf29ufn
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 6
+        )
+
+)
+
+[2025-12-08 07:22:36] POST: Array
+(
+    [name] => Hộp cầu chất lượng cao
+    [price] => 100000
+)
+ SID: ift0ia9hp7j3o8rjpmaum6v8p0
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+>>>>>>> c19ab9b6025dd635603a11a55d677e53da6a99e3
             [quantity] => 1
         )
 
 )
 
+<<<<<<< HEAD
 [2025-12-06 16:47:50] POST: Array
 (
     [name] => Vợt cầu lông Victor DriveX 12 ZSW
@@ -454,11 +521,33 @@
         (
             [name] => Vợt cầu lông Victor DriveX 12 ZSW
             [price] => 6000000
+=======
+[2025-12-08 07:23:02] POST: Array
+(
+    [name] => Túi to
+    [price] => 500000
+)
+ SID: ift0ia9hp7j3o8rjpmaum6v8p0
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 1
+        )
+
+    [Túi to] => Array
+        (
+            [name] => Túi to
+            [price] => 500000
+>>>>>>> c19ab9b6025dd635603a11a55d677e53da6a99e3
             [quantity] => 1
         )
 
 )
 
+<<<<<<< HEAD
 [2025-12-06 16:47:50] POST: Array
 (
     [name] => Vợt cầu lông Victor DriveX 12 ZSW
@@ -471,11 +560,33 @@
         (
             [name] => Vợt cầu lông Victor DriveX 12 ZSW
             [price] => 6000000
+=======
+[2025-12-08 07:23:08] POST: Array
+(
+    [name] => Túi to
+    [price] => 500000
+)
+ SID: ift0ia9hp7j3o8rjpmaum6v8p0
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 1
+        )
+
+    [Túi to] => Array
+        (
+            [name] => Túi to
+            [price] => 500000
+>>>>>>> c19ab9b6025dd635603a11a55d677e53da6a99e3
             [quantity] => 2
         )
 
 )
 
+<<<<<<< HEAD
 [2025-12-06 16:47:52] POST: Array
 (
     [name] => Vợt cầu lông Lining Halbertec Motor Pro Chính hãng
@@ -496,10 +607,57 @@
             [name] => Vợt cầu lông Lining Halbertec Motor Pro Chính hãng
             [price] => 2150000
             [quantity] => 1
+=======
+[2025-12-08 07:23:09] POST: Array
+(
+    [name] => Túi to
+    [price] => 500000
+)
+ SID: ift0ia9hp7j3o8rjpmaum6v8p0
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 1
+        )
+
+    [Túi to] => Array
+        (
+            [name] => Túi to
+            [price] => 500000
+            [quantity] => 3
         )
 
 )
 
+[2025-12-08 07:40:21] POST: Array
+(
+    [name] => Hộp cầu chất lượng cao
+    [price] => 100000
+)
+ SID: ift0ia9hp7j3o8rjpmaum6v8p0
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 2
+        )
+
+    [Túi to] => Array
+        (
+            [name] => Túi to
+            [price] => 500000
+            [quantity] => 3
+>>>>>>> c19ab9b6025dd635603a11a55d677e53da6a99e3
+        )
+
+)
+
+<<<<<<< HEAD
 [2025-12-06 16:47:53] POST: Array
 (
     [name] => Vợt cầu lông Felet Woven 8000
@@ -527,6 +685,28 @@
             [name] => Vợt cầu lông Felet Woven 8000
             [price] => 2979000
             [quantity] => 1
+=======
+[2025-12-08 07:40:21] POST: Array
+(
+    [name] => Hộp cầu chất lượng cao
+    [price] => 100000
+)
+ SID: ift0ia9hp7j3o8rjpmaum6v8p0
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 3
+        )
+
+    [Túi to] => Array
+        (
+            [name] => Túi to
+            [price] => 500000
+            [quantity] => 3
+>>>>>>> c19ab9b6025dd635603a11a55d677e53da6a99e3
         )
 
 )
