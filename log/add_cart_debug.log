@@ -418,3 +418,191 @@
 
 )
 
+[2025-12-08 07:13:25] POST: Array
+(
+    [name] => Hộp cầu chất lượng cao
+    [price] => 100000
+)
+ SID: ib7283tslu72hg7ire6jf29ufn
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 4
+        )
+
+)
+
+[2025-12-08 07:13:25] POST: Array
+(
+    [name] => Hộp cầu chất lượng cao
+    [price] => 100000
+)
+ SID: ib7283tslu72hg7ire6jf29ufn
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 5
+        )
+
+)
+
+[2025-12-08 07:13:25] POST: Array
+(
+    [name] => Hộp cầu chất lượng cao
+    [price] => 100000
+)
+ SID: ib7283tslu72hg7ire6jf29ufn
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 6
+        )
+
+)
+
+[2025-12-08 07:22:36] POST: Array
+(
+    [name] => Hộp cầu chất lượng cao
+    [price] => 100000
+)
+ SID: ift0ia9hp7j3o8rjpmaum6v8p0
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 1
+        )
+
+)
+
+[2025-12-08 07:23:02] POST: Array
+(
+    [name] => Túi to
+    [price] => 500000
+)
+ SID: ift0ia9hp7j3o8rjpmaum6v8p0
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 1
+        )
+
+    [Túi to] => Array
+        (
+            [name] => Túi to
+            [price] => 500000
+            [quantity] => 1
+        )
+
+)
+
+[2025-12-08 07:23:08] POST: Array
+(
+    [name] => Túi to
+    [price] => 500000
+)
+ SID: ift0ia9hp7j3o8rjpmaum6v8p0
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 1
+        )
+
+    [Túi to] => Array
+        (
+            [name] => Túi to
+            [price] => 500000
+            [quantity] => 2
+        )
+
+)
+
+[2025-12-08 07:23:09] POST: Array
+(
+    [name] => Túi to
+    [price] => 500000
+)
+ SID: ift0ia9hp7j3o8rjpmaum6v8p0
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 1
+        )
+
+    [Túi to] => Array
+        (
+            [name] => Túi to
+            [price] => 500000
+            [quantity] => 3
+        )
+
+)
+
+[2025-12-08 07:40:21] POST: Array
+(
+    [name] => Hộp cầu chất lượng cao
+    [price] => 100000
+)
+ SID: ift0ia9hp7j3o8rjpmaum6v8p0
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 2
+        )
+
+    [Túi to] => Array
+        (
+            [name] => Túi to
+            [price] => 500000
+            [quantity] => 3
+        )
+
+)
+
+[2025-12-08 07:40:21] POST: Array
+(
+    [name] => Hộp cầu chất lượng cao
+    [price] => 100000
+)
+ SID: ift0ia9hp7j3o8rjpmaum6v8p0
+  CART after: Array
+(
+    [Hộp cầu chất lượng cao] => Array
+        (
+            [name] => Hộp cầu chất lượng cao
+            [price] => 100000
+            [quantity] => 3
+        )
+
+    [Túi to] => Array
+        (
+            [name] => Túi to
+            [price] => 500000
+            [quantity] => 3
+        )
+
+)
+

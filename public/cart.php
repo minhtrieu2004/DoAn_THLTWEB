@@ -14,7 +14,7 @@ include '../includes/header.php';
                                 <th scope="col" style="width: 15%;">Giá</th>
                                 <th scope="col" style="width: 20%;">Số Lượng</th>
                                 <th scope="col" style="width: 15%;">Tạm Tính</th>
-
+                                <th scope="col" style="width: 10%;">Xóa</th>
                             </tr>
                         </thead>
                         <tbody id="cart-items">

@@ -35,33 +35,90 @@ function updateCartCount() {
 }
 
 // Thêm sản phẩm vào giỏ hàng (AJAX)
-function addToCart(name, price) {
-  fetch("../private/add_cart.php", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: `name=${encodeURIComponent(name)}&price=${price}`,
-  })
+function addToCart(product_id) {
+    fetch('../private/add_cart.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'product_id=' + product_id
+    })
     .then((res) => res.json())
     .then((data) => {
-      console.log("Add to cart response:", data);
       if (data.success) {
-        updateCartCount();
-      } else {
-        alert("Lỗi: " + data.message);
+        updateCartCount(); // ⭐ Cập nhật số lượng ngay lập tức
       }
     })
-    .catch((error) => {
-      console.error("Add to cart error:", error);
-      alert("Lỗi khi thêm vào giỏ hàng");
-    });
+    .catch(err => console.error("Add cart error:", err));
 }
 
-// Cập nhật giỏ hàng: increase, decrease, remove, clear
-function updateCart(action, name = "") {
+
+// Load giỏ hàng (dùng cho trang cart.php)
+function loadCart() {
+  fetch("../private/get_cart.php")
+    .then(res => res.json())
+    .then(data => {
+
+      console.log(data); // debug
+
+      const tbody = document.getElementById("cart-items");
+      const subtotalEl = document.getElementById("cart-subtotal");
+      const totalEl = document.getElementById("cart-total");
+
+      if (!tbody) return;
+
+      tbody.innerHTML = "";
+
+      // Nếu thất bại hoặc giỏ trống
+      if (!data.success || !data.cart || data.cart.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="4" class="text-center">Giỏ hàng trống</td>
+          </tr>
+        `;
+        subtotalEl.textContent = "0 VND";
+        totalEl.textContent = "0 VND";
+        return;
+      }
+
+      let items = data.cart;
+      let totalPrice = data.totalPrice;
+
+      items.forEach(item => {
+        const subtotal = item.price * item.quantity;
+
+        tbody.innerHTML += `
+          <tr>
+            <td class="text-start">
+              <img src="../${item.image}" width="60" class="me-2">
+              ${item.name}
+            </td>
+            <td>${formatPrice(item.price)}</td>
+            <td>
+              <button class="btn btn-sm btn-secondary" onclick="updateQuantity(${item.cart_item_id}, 'decrease')">−</button>
+              <span style="margin: 0 10px; font-weight: bold;">${item.quantity}</span>
+              <button class="btn btn-sm btn-secondary" onclick="updateQuantity(${item.cart_item_id}, 'increase')">+</button>
+            </td>
+            <td>${formatPrice(subtotal)}</td>
+            <td>
+              <button class="btn btn-sm btn-danger" onclick="deleteCartItem(${item.cart_item_id})">Xóa</button>
+            </td>
+          </tr>
+        `;
+      });
+
+      subtotalEl.textContent = formatPrice(totalPrice);
+      totalEl.textContent = formatPrice(totalPrice);
+    })
+    .catch(err => console.error("Load cart error:", err));
+}
+
+
+
+// Cập nhật số lượng sản phẩm (+ / -)
+function updateQuantity(cart_item_id, action) {
   fetch("../private/update_cart.php", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: `action=${action}&name=${encodeURIComponent(name)}`,
+    body: `action=${action}&item_id=${cart_item_id}`,
   })
     .then((res) => res.json())
     .then((data) => {
@@ -69,69 +126,61 @@ function updateCart(action, name = "") {
         updateCartCount();
         loadCart();
       } else {
-        alert("Lỗi khi cập nhật giỏ hàng");
+        alert("Lỗi: " + data.message);
+      }
+    })
+    .catch((error) => {
+      console.error("Update quantity error:", error);
+      alert("Không thể cập nhật giỏ hàng");
+    });
+}
+
+// Xóa sản phẩm khỏi giỏ hàng
+function deleteCartItem(cart_item_id) {
+  if (!confirm("Bạn muốn xóa sản phẩm này?")) return;
+  
+  fetch("../private/update_cart.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `action=remove&item_id=${cart_item_id}`,
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.success) {
+        updateCartCount();
+        loadCart();
+      } else {
+        alert("Lỗi: " + data.message);
+      }
+    })
+    .catch((error) => {
+      console.error("Delete cart error:", error);
+      alert("Không thể xóa sản phẩm");
+    });
+}
+
+// Cập nhật giỏ hàng: increase, decrease, remove, clear
+function updateCart(action, cart_item_id) {
+  fetch("../private/update_cart.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `action=${action}&cart_item_id=${cart_item_id}`,
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.success) {
+        updateCartCount();
+        loadCart();
+      } else {
+        alert("Lỗi khi cập nhật giỏ hàng: " + data.message);
       }
     })
     .catch((error) => {
       console.error("Update cart error:", error);
-      alert("Lỗi khi cập nhật giỏ hàng");
+      alert("Không thể cập nhật giỏ hàng");
     });
 }
 
-// Load giỏ hàng (dùng cho trang cart.php)
-function loadCart() {
-  fetch("../private/get_cart.php")
-    .then((res) => res.json())
-    .then((data) => {
-      if (!data.success) {
-        console.error("Load cart error:", data);
-        return;
-      }
-
-      const tbody = document.getElementById("cart-items");
-      const subtotalEl = document.getElementById("cart-subtotal");
-      const totalEl = document.getElementById("cart-total");
-      if (!tbody) return;
-
-      tbody.innerHTML = "";
-
-      if (data.cart.length === 0) {
-        tbody.innerHTML =
-          '<tr><td colspan="5" class="text-center">Giỏ hàng trống</td></tr>';
-      } else {
-        data.cart.forEach((item) => {
-          const row = document.createElement("tr");
-          const id = md5(item.name);
-          row.innerHTML = `
-                        <td>${item.name}</td>
-                        <td>${formatPrice(item.price)}</td>
-                        <td>
-                            <button class="btn btn-sm btn-secondary" onclick="updateCart('decrease','${
-                              item.name
-                            }')">-</button>
-                            <span id="qty-${id}">${item.quantity}</span>
-                            <button class="btn btn-sm btn-secondary" onclick="updateCart('increase','${
-                              item.name
-                            }')">+</button>
-                        </td>
-                        <td id="subtotal-${id}">${formatPrice(
-            item.price * item.quantity
-          )}</td>
-                        <td>
-                            <button class="btn btn-sm btn-danger" onclick="updateCart('remove','${
-                              item.name
-                            }')">Xóa</button>
-                        </td>
-                    `;
-          tbody.appendChild(row);
-        });
-      }
-
-      if (subtotalEl) subtotalEl.textContent = formatPrice(data.totalPrice);
-      if (totalEl) totalEl.textContent = formatPrice(data.totalPrice);
-    })
-    .catch((error) => console.error("Load cart error:", error));
-}
 
 // Hàm md5 giả lập JS (dùng tên sản phẩm làm id)
 function md5(str) {

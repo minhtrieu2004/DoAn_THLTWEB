@@ -110,7 +110,7 @@ $totalPages = ($total > 0) ? ceil($total / $limit) : 1;
                                 </div>
                             </div>
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center">
-                                <button class="btn btn-outline-dark mt-auto" onclick="event.stopPropagation(); addToCart('<?= htmlspecialchars($row['name'], ENT_QUOTES) ?>', <?= (float)$row['price'] ?>)">Add to cart</button>
+                                <button class="btn btn-outline-dark mt-auto" onclick="event.stopPropagation(); addToCart(<?= $row['product_id'] ?>)"> Add to cart </button>
                             </div>
                         </div>
                     </div>

@@ -59,7 +59,7 @@ $related = $related_stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="d-flex">
                     <!-- input ở dưới là nút nhập số lượng -->
                     <!-- <input class="form-control text-center me-3" id="inputQuantity" type="number" value="1" min="1" style="max-width: 3rem" /> -->
-                    <button class="btn btn-outline-dark flex-shrink-0" onclick="addToCart('<?= htmlspecialchars($product['name'], ENT_QUOTES) ?>', <?= (float)$product['price'] ?>)">
+                    <button class="btn btn-outline-dark flex-shrink-0" onclick="addToCart(<?= (int)$product['product_id'] ?>)">
                         <i class="bi-cart-fill me-1"></i> Add to cart
                     </button>
                 </div>
@@ -87,9 +87,7 @@ $related = $related_stmt->fetchAll(PDO::FETCH_ASSOC);
                         </div>
 
                         <div class="text-center pb-3">
-                            <button class="btn btn-outline-dark mt-auto" onclick="event.stopPropagation(); addToCart('<?= htmlspecialchars($row['name'], ENT_QUOTES) ?>', <?= (float)$row['price'] ?>)">
-                                Add to cart
-                            </button>
+                            <button class="btn btn-outline-dark mt-auto" onclick="event.stopPropagation(); addToCart(<?= $row['product_id'] ?>)"> Add to cart </button>
                         </div>
 
                     </div>
