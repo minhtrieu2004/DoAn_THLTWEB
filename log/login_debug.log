@@ -34,3 +34,9 @@
     [password] => trieu2004
 )
 
+[2025-12-06 16:47:59] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => 123456
+)
+
