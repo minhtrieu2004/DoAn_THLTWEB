@@ -14,9 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $username_or_email = isset($_POST['username']) ? trim($_POST['username']) : '';
 $password = isset($_POST['password']) ? trim($_POST['password']) : '';
 
-// Ghi log debug để kiểm tra dữ liệu POST (dev only)
-$debug = "[" . date('Y-m-d H:i:s') . "] " . ($_SERVER['REMOTE_ADDR'] ?? 'unknown') . " METHOD=" . ($_SERVER['REQUEST_METHOD'] ?? '') . " POST=" . print_r($_POST, true) . "\n";
-file_put_contents(__DIR__ . '/../log/login_debug.log', $debug, FILE_APPEND | LOCK_EX);
+
 
 
 // Kiểm tra dữ liệu rỗng
