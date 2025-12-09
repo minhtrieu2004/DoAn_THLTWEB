@@ -63,7 +63,7 @@ if (!$cartItem) {
 $cart_item_id = $cartItem['cart_item_id'];
 $quantity = $cartItem['quantity'];
 
-// REMOVE
+// xóa
 if ($action === 'remove') {
     $stmt = $pdo->prepare("DELETE FROM cart_items WHERE cart_item_id = ?");
     $stmt->execute([$cart_item_id]);
@@ -72,7 +72,7 @@ if ($action === 'remove') {
     exit;
 }
 
-// DECREASE
+// giảm
 if ($action === 'decrease') {
     if ($quantity > 1) {
         $stmt = $pdo->prepare("UPDATE cart_items SET quantity = quantity - 1 WHERE cart_item_id = ?");
@@ -86,7 +86,7 @@ if ($action === 'decrease') {
     exit;
 }
 
-// INCREASE
+// tăng
 if ($action === 'increase') {
     $stmt = $pdo->prepare("UPDATE cart_items SET quantity = quantity + 1 WHERE cart_item_id = ?");
     $stmt->execute([$cart_item_id]);

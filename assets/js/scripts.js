@@ -377,14 +377,14 @@ function initRegisterFormValidation() {
     confirm_password: [],
   };
 
-  // Get all input fields
+  // Lấy tất cả các trường nhập liệu
   const fields = document.querySelectorAll(".validate-field");
   const form = document.getElementById("registerForm");
 
-  // Return if form doesn't exist (e.g., not on register page)
+  // Trả về nếu biểu mẫu không tồn tại (ví dụ: không có trên trang đăng ký)
   if (!form) return;
 
-  // Real-time validation on input
+  // Xác thực theo thời gian thực trên đầu vào
   fields.forEach((field) => {
     field.addEventListener("input", () =>
       validateRegisterField(field, validationRules)
@@ -394,7 +394,7 @@ function initRegisterFormValidation() {
     );
   });
 
-  // Form submission validation
+  // Xác thực gửi biểu mẫu
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -405,7 +405,7 @@ function initRegisterFormValidation() {
       }
     });
 
-    // Check confirm password one more time
+    // Kiểm tra lại mật khẩu xác nhận một lần nữa
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirm_password").value;
     if (password !== confirmPassword) {
@@ -416,7 +416,7 @@ function initRegisterFormValidation() {
     }
 
     if (isValid) {
-      // If validation passes, submit the form
+      // Nếu xác thực thành công, hãy gửi biểu mẫu
       this.submit();
     }
   });
@@ -428,7 +428,7 @@ function validateRegisterField(field, validationRules) {
   const errorElement = document.getElementById(`error-${fieldName}`);
   const value = field.value.trim();
 
-  // Special case for confirm_password
+  // Trường hợp đặc biệt cho xác nhận mật khẩu
   if (fieldName === "confirm_password") {
     const password = document.getElementById("password").value;
     if (value && value !== password) {
@@ -442,24 +442,24 @@ function validateRegisterField(field, validationRules) {
     }
   }
 
-  // Get validation rules for this field
+  // Lấy quy tắc xác thực cho trường này
   const rules = validationRules[fieldName] || [];
 
-  // Check if field is required and empty
+  // Kiểm tra xem trường có bắt buộc và trống không
   if (field.hasAttribute("required") && !value) {
     errorElement.textContent = `❌ ${field.previousElementSibling.textContent.trim()} không được để trống`;
     field.classList.add("is-invalid");
     return false;
   }
 
-  // Skip validation if field is empty and not required
+  // Bỏ qua việc xác thực nếu trường trống và không bắt buộc
   if (!value && !field.hasAttribute("required")) {
     errorElement.textContent = "";
     field.classList.remove("is-invalid");
     return true;
   }
 
-  // Check all validation rules
+  // Kiểm tra tất cả các quy tắc xác thực
   for (let rule of rules) {
     if (!rule.test(value)) {
       errorElement.textContent = rule.msg;
@@ -468,13 +468,13 @@ function validateRegisterField(field, validationRules) {
     }
   }
 
-  // All validations passed
+  // Tất cả các kiểm tra đều hợp lệ
   errorElement.textContent = "";
   field.classList.remove("is-invalid");
   return true;
 }
 
-// Initialize register validation when DOM is ready
+// Khởi tạo xác thực đăng ký khi DOM sẵn sàng
 document.addEventListener("DOMContentLoaded", function () {
   initRegisterFormValidation();
 });

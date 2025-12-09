@@ -18,7 +18,7 @@ include '../includes/header.php';
                             </tr>
                         </thead>
                         <tbody id="cart-items">
-                            <!-- Cart items loaded by JS loadCart() -->
+                            <!-- Các mục trong giỏ hàng được tải bởi JS loadCart() -->
                         </tbody>
                     </table>
 
@@ -58,7 +58,7 @@ include '../includes/header.php';
 </section>
 
 <script>
-    // Ensure cart loads when page opens
+    // Đảm bảo giỏ hàng tải khi trang mở
     document.addEventListener('DOMContentLoaded', function() {
         loadCart();
     });
