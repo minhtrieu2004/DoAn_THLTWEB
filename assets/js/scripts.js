@@ -348,12 +348,8 @@ function initRegisterFormValidation() {
     ],
     phone: [
       {
-        test: (val) => val === "" || /^[0-9\+\-\s\(\)]+$/.test(val),
-        msg: "❌ Số điện thoại không hợp lệ",
-      },
-      {
-        test: (val) => val === "" || val.length <= 20,
-        msg: "❌ Số điện thoại không được vượt quá 20 ký tự",
+        test: (val) => /^0[0-9]{9,10}$/.test(val),
+        msg: "❌ Số điện thoại phải bắt đầu bằng số 0 và có 10 hoặc 11 chữ số",
       },
     ],
     address: [

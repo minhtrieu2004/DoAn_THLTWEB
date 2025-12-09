@@ -51,8 +51,7 @@ require_once '../includes/header.php';
                             <div class="mb-3">
                                 <label for="phone" class="form-label text-white">Số điện thoại</label>
                                 <input type="tel" class="form-control validate-field" id="phone" name="phone"
-                                    placeholder="0xxxxxxxxx hoặc +84xxxxxxxxx" maxlength="20"
-                                    pattern="[0-9\+\-\s\(\)]+" title="Số điện thoại hợp lệ">
+                                    placeholder="0xxxxxxxxx" required pattern="0[0-9]{9,10}" title="Số điện thoại phải bắt đầu bằng số 0 và có 10 hoặc 11 chữ số">
                                 <small class="invalid-feedback d-block text-danger" id="error-phone"></small>
                             </div>
 

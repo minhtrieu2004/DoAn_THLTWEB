@@ -86,9 +86,9 @@ if (isset($_SESSION['success'])): ?>
                         echo "<td>" . htmlspecialchars(mb_substr($description ?? '', 0, 50, 'UTF-8')) . "...</td>";
                         echo "<td>";
                         // Nút XEM;
-                        echo "<a href='../public/product_detail.php?id={$product_id}' class='btn btn-sm btn-info'>Xem</a>";
+                        echo "<a href='../public/product_detail.php?id={$product_id}' class='btn btn-sm btn-info me-2'>Xem</a>";
                         // Nút Sửa
-                        echo "<button class='btn btn-sm btn-warning me-1 edit-product-btn' 
+                        echo "<button class='btn btn-sm btn-warning me-2 edit-product-btn' 
                                                     data-bs-toggle='modal' 
                                                     data-bs-target='#productModal' 
                                                     data-id='{$product_id}'>Sửa</button>";
