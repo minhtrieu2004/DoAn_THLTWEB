@@ -1,11 +1,3 @@
-/*!
- * Start Bootstrap - Shop Item v5.0.6 (https://startbootstrap.com/template/shop-item)
- * Copyright 2013-2023 Start Bootstrap
- * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-shop-item/blob/master/LICENSE)
- */
-// This file is intentionally blank
-// Use this file to add JavaScript to your project
-
 // Hàm format tiền VND
 function formatPrice(price) {
   // Format số VND theo chuẩn Việt Nam: 1.000.000 đ
@@ -36,27 +28,25 @@ function updateCartCount() {
 
 // Thêm sản phẩm vào giỏ hàng (AJAX)
 function addToCart(product_id) {
-    fetch('../private/add_cart.php', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: 'product_id=' + product_id
-    })
+  fetch("../private/add_cart.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: "product_id=" + product_id,
+  })
     .then((res) => res.json())
     .then((data) => {
       if (data.success) {
         updateCartCount(); // ⭐ Cập nhật số lượng ngay lập tức
       }
     })
-    .catch(err => console.error("Add cart error:", err));
+    .catch((err) => console.error("Add cart error:", err));
 }
-
 
 // Load giỏ hàng (dùng cho trang cart.php)
 function loadCart() {
   fetch("../private/get_cart.php")
-    .then(res => res.json())
-    .then(data => {
-
+    .then((res) => res.json())
+    .then((data) => {
       console.log(data); // debug
 
       const tbody = document.getElementById("cart-items");
@@ -82,7 +72,7 @@ function loadCart() {
       let items = data.cart;
       let totalPrice = data.totalPrice;
 
-      items.forEach(item => {
+      items.forEach((item) => {
         const subtotal = item.price * item.quantity;
 
         tbody.innerHTML += `
@@ -93,13 +83,21 @@ function loadCart() {
             </td>
             <td>${formatPrice(item.price)}</td>
             <td>
-              <button class="btn btn-sm btn-secondary" onclick="updateQuantity(${item.cart_item_id}, 'decrease')">−</button>
-              <span style="margin: 0 10px; font-weight: bold;">${item.quantity}</span>
-              <button class="btn btn-sm btn-secondary" onclick="updateQuantity(${item.cart_item_id}, 'increase')">+</button>
+              <button class="btn btn-sm btn-secondary" onclick="updateQuantity(${
+                item.cart_item_id
+              }, 'decrease')">−</button>
+              <span style="margin: 0 10px; font-weight: bold;">${
+                item.quantity
+              }</span>
+              <button class="btn btn-sm btn-secondary" onclick="updateQuantity(${
+                item.cart_item_id
+              }, 'increase')">+</button>
             </td>
             <td>${formatPrice(subtotal)}</td>
             <td>
-              <button class="btn btn-sm btn-danger" onclick="deleteCartItem(${item.cart_item_id})">Xóa</button>
+              <button class="btn btn-sm btn-danger" onclick="deleteCartItem(${
+                item.cart_item_id
+              })">Xóa</button>
             </td>
           </tr>
         `;
@@ -108,10 +106,8 @@ function loadCart() {
       subtotalEl.textContent = formatPrice(totalPrice);
       totalEl.textContent = formatPrice(totalPrice);
     })
-    .catch(err => console.error("Load cart error:", err));
+    .catch((err) => console.error("Load cart error:", err));
 }
-
-
 
 // Cập nhật số lượng sản phẩm (+ / -)
 function updateQuantity(cart_item_id, action) {
@@ -138,7 +134,7 @@ function updateQuantity(cart_item_id, action) {
 // Xóa sản phẩm khỏi giỏ hàng
 function deleteCartItem(cart_item_id) {
   if (!confirm("Bạn muốn xóa sản phẩm này?")) return;
-  
+
   fetch("../private/update_cart.php", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -180,7 +176,6 @@ function updateCart(action, cart_item_id) {
       alert("Không thể cập nhật giỏ hàng");
     });
 }
-
 
 // Hàm md5 giả lập JS (dùng tên sản phẩm làm id)
 function md5(str) {
@@ -308,4 +303,178 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
   });
+});
+
+// Hàm khởi tạo validation cho form đăng ký
+function initRegisterFormValidation() {
+  const validationRules = {
+    full_name: [
+      {
+        test: (val) => val.length >= 3,
+        msg: "❌ Họ và tên phải có ít nhất 3 ký tự",
+      },
+      {
+        test: (val) => val.length <= 100,
+        msg: "❌ Họ và tên không được vượt quá 100 ký tự",
+      },
+      {
+        test: (val) => !/[<>{}[\]\\\/`~!@#$%^&*()+=|;:'",?]/g.test(val),
+        msg: "❌ Họ và tên không được chứa ký tự đặc biệt",
+      },
+    ],
+    username: [
+      {
+        test: (val) => val.length >= 3,
+        msg: "❌ Tên đăng nhập phải có ít nhất 3 ký tự",
+      },
+      {
+        test: (val) => val.length <= 50,
+        msg: "❌ Tên đăng nhập không được vượt quá 50 ký tự",
+      },
+      {
+        test: (val) => /^[a-zA-Z0-9_]+$/.test(val),
+        msg: "❌ Chỉ chứa chữ cái, số và dấu gạch dưới",
+      },
+    ],
+    email: [
+      {
+        test: (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val),
+        msg: "❌ Email không hợp lệ",
+      },
+      {
+        test: (val) => val.length <= 100,
+        msg: "❌ Email không được vượt quá 100 ký tự",
+      },
+    ],
+    phone: [
+      {
+        test: (val) => val === "" || /^[0-9\+\-\s\(\)]+$/.test(val),
+        msg: "❌ Số điện thoại không hợp lệ",
+      },
+      {
+        test: (val) => val === "" || val.length <= 20,
+        msg: "❌ Số điện thoại không được vượt quá 20 ký tự",
+      },
+    ],
+    address: [
+      {
+        test: (val) => val === "" || val.length <= 200,
+        msg: "❌ Địa chỉ không được vượt quá 200 ký tự",
+      },
+    ],
+    password: [
+      {
+        test: (val) => val.length >= 6,
+        msg: "❌ Mật khẩu phải có ít nhất 6 ký tự",
+      },
+      {
+        test: (val) => /[a-z]/.test(val),
+        msg: "❌ Mật khẩu phải có chữ thường",
+      },
+      { test: (val) => /[A-Z]/.test(val), msg: "❌ Mật khẩu phải có chữ hoa" },
+      { test: (val) => /[0-9]/.test(val), msg: "❌ Mật khẩu phải có chữ số" },
+    ],
+    confirm_password: [],
+  };
+
+  // Get all input fields
+  const fields = document.querySelectorAll(".validate-field");
+  const form = document.getElementById("registerForm");
+
+  // Return if form doesn't exist (e.g., not on register page)
+  if (!form) return;
+
+  // Real-time validation on input
+  fields.forEach((field) => {
+    field.addEventListener("input", () =>
+      validateRegisterField(field, validationRules)
+    );
+    field.addEventListener("blur", () =>
+      validateRegisterField(field, validationRules)
+    );
+  });
+
+  // Form submission validation
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    let isValid = true;
+    fields.forEach((field) => {
+      if (!validateRegisterField(field, validationRules)) {
+        isValid = false;
+      }
+    });
+
+    // Check confirm password one more time
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm_password").value;
+    if (password !== confirmPassword) {
+      document.getElementById("error-confirm_password").textContent =
+        "❌ Mật khẩu xác nhận không khớp";
+      document.getElementById("confirm_password").classList.add("is-invalid");
+      isValid = false;
+    }
+
+    if (isValid) {
+      // If validation passes, submit the form
+      this.submit();
+    }
+  });
+}
+
+// Hàm validate từng field
+function validateRegisterField(field, validationRules) {
+  const fieldName = field.id;
+  const errorElement = document.getElementById(`error-${fieldName}`);
+  const value = field.value.trim();
+
+  // Special case for confirm_password
+  if (fieldName === "confirm_password") {
+    const password = document.getElementById("password").value;
+    if (value && value !== password) {
+      errorElement.textContent = "❌ Mật khẩu xác nhận không khớp";
+      field.classList.add("is-invalid");
+      return false;
+    } else {
+      errorElement.textContent = "";
+      field.classList.remove("is-invalid");
+      return true;
+    }
+  }
+
+  // Get validation rules for this field
+  const rules = validationRules[fieldName] || [];
+
+  // Check if field is required and empty
+  if (field.hasAttribute("required") && !value) {
+    errorElement.textContent = `❌ ${field.previousElementSibling.textContent.trim()} không được để trống`;
+    field.classList.add("is-invalid");
+    return false;
+  }
+
+  // Skip validation if field is empty and not required
+  if (!value && !field.hasAttribute("required")) {
+    errorElement.textContent = "";
+    field.classList.remove("is-invalid");
+    return true;
+  }
+
+  // Check all validation rules
+  for (let rule of rules) {
+    if (!rule.test(value)) {
+      errorElement.textContent = rule.msg;
+      field.classList.add("is-invalid");
+      return false;
+    }
+  }
+
+  // All validations passed
+  errorElement.textContent = "";
+  field.classList.remove("is-invalid");
+  return true;
+}
+
+// Initialize register validation when DOM is ready
+document.addEventListener("DOMContentLoaded", function () {
+  initRegisterFormValidation();
 });

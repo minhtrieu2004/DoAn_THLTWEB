@@ -30,6 +30,8 @@ $user_role = $is_logged_in ? ($_SESSION['role'] ?? 'user') : null;
         rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../assets/css/styles.css" rel="stylesheet" />
+    <!-- Main JavaScript for common functions -->
+    <script src="../assets/js/scripts.js"></script>
 </head>
 
 <body class="d-flex flex-column min-vh-100">

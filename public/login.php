@@ -7,9 +7,20 @@ require_once '../includes/header.php';
 </div>
 <main class="flex-shrink-0">
     <?php if (session_status() === PHP_SESSION_NONE) session_start(); ?>
+
+    <?php if (!empty($_SESSION['success'])): ?>
+        <div class="container my-3">
+            <div class="alert alert-success text-center" role="alert">
+                <h5 class="mb-2">Chúc mừng!</h5>
+                <?php echo $_SESSION['success'];
+                unset($_SESSION['success']); ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <?php if (!empty($_SESSION['error'])): ?>
         <div class="container my-3">
-            <div class="alert alert-danger text-center">
+            <div class="alert alert-danger text-center" role="alert">
                 <?php echo htmlspecialchars($_SESSION['error']);
                 unset($_SESSION['error']); ?>
             </div>
@@ -61,6 +72,6 @@ require_once '../includes/header.php';
 </main>
 
 <?php
-// Nhúng footer
+
 require_once '../includes/footer.php';
 ?>

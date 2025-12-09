@@ -125,3 +125,39 @@
 >>>>>>> c19ab9b6025dd635603a11a55d677e53da6a99e3
 )
 
+[2025-12-08 08:59:44] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => 123456
+)
+
+[2025-12-08 08:59:58] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => 123456
+)
+
+[2025-12-08 09:01:52] ::1 METHOD=POST POST=Array
+(
+    [username] => user1
+    [password] => trieu2004
+)
+
+[2025-12-08 09:03:08] ::1 METHOD=POST POST=Array
+(
+    [username] => usertest1
+    [password] => 123456
+)
+
+[2025-12-08 09:07:04] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => ádsd
+)
+
+[2025-12-08 09:07:10] ::1 METHOD=POST POST=Array
+(
+    [username] => ghgh
+    [password] => ghgh
+)
+

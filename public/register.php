@@ -24,40 +24,58 @@ require_once '../includes/header.php';
                     </div>
 
                     <div class="card-body p-4">
-                        <form action="../private/register_handler.php" method="POST">
+                        <form id="registerForm" action="../private/register_handler.php" method="POST" novalidate>
 
                             <div class="mb-3">
-                                <label for="full_name" class="form-label text-white">Họ và Tên</label>
-                                <input type="text" class="form-control" id="full_name" name="full_name" required>
+                                <label for="full_name" class="form-label text-white">Họ và Tên *</label>
+                                <input type="text" class="form-control validate-field" id="full_name" name="full_name"
+                                    placeholder="Nhập họ và tên" required minlength="3" maxlength="100"
+                                    title="Họ và tên không được chứa ký tự đặc biệt">
+                                <small class="invalid-feedback d-block text-danger" id="error-full_name"></small>
                             </div>
 
                             <div class="mb-3">
-                                <label for="username" class="form-label text-white">Tên đăng nhập</label>
-                                <input type="text" class="form-control" id="username" name="username" required>
+                                <label for="username" class="form-label text-white">Tên đăng nhập *</label>
+                                <input type="text" class="form-control validate-field" id="username" name="username"
+                                    placeholder="Nhập tên đăng nhập (3-50 ký tự)" required minlength="3" maxlength="50"
+                                    pattern="[a-zA-Z0-9_]+" title="Chỉ chứa chữ cái, số và dấu gạch dưới">
+                                <small class="invalid-feedback d-block text-danger" id="error-username"></small>
                             </div>
 
                             <div class="mb-3">
-                                <label for="email" class="form-label text-white">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <label for="email" class="form-label text-white">Email *</label>
+                                <input type="email" class="form-control validate-field" id="email" name="email"
+                                    placeholder="Nhập email" required maxlength="100">
+                                <small class="invalid-feedback d-block text-danger" id="error-email"></small>
                             </div>
                             <div class="mb-3">
                                 <label for="phone" class="form-label text-white">Số điện thoại</label>
-                                <input type="tel" class="form-control" id="phone" name="phone">
+                                <input type="tel" class="form-control validate-field" id="phone" name="phone"
+                                    placeholder="0xxxxxxxxx hoặc +84xxxxxxxxx" maxlength="20"
+                                    pattern="[0-9\+\-\s\(\)]+" title="Số điện thoại hợp lệ">
+                                <small class="invalid-feedback d-block text-danger" id="error-phone"></small>
                             </div>
 
                             <div class="mb-3">
                                 <label for="address" class="form-label text-white">Địa chỉ</label>
-                                <input type="text" class="form-control" id="address" name="address">
+                                <textarea class="form-control validate-field" id="address" name="address" rows="2"
+                                    placeholder="Nhập địa chỉ của bạn" maxlength="200"></textarea>
+                                <small class="invalid-feedback d-block text-danger" id="error-address"></small>
                             </div>
 
                             <div class="mb-3">
-                                <label for="password" class="form-label text-white">Mật khẩu</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
+                                <label for="password" class="form-label text-white">Mật khẩu *</label>
+                                <input type="password" class="form-control validate-field" id="password" name="password"
+                                    placeholder="Nhập mật khẩu (tối thiểu 6 ký tự)" required minlength="6" maxlength="100">
+                                <small class="form-text text-muted d-block" style="color: #ccc !important;">Phải chứa: chữ thường, chữ hoa và chữ số</small>
+                                <small class="invalid-feedback d-block text-danger" id="error-password"></small>
                             </div>
 
                             <div class="mb-4">
-                                <label for="confirm_password" class="form-label text-white">Xác nhận Mật khẩu</label>
-                                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                                <label for="confirm_password" class="form-label text-white">Xác nhận Mật khẩu *</label>
+                                <input type="password" class="form-control validate-field" id="confirm_password" name="confirm_password"
+                                    placeholder="Xác nhận mật khẩu" required minlength="6" maxlength="100">
+                                <small class="invalid-feedback d-block text-danger" id="error-confirm_password"></small>
                             </div>
 
                             <div class="d-grid mb-3">
