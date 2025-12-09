@@ -8,7 +8,6 @@ require "../config/db.php";
 // ===========================================
 if (!isset($_SESSION['user_id'])) {
 
-    // Nếu chưa có giỏ guest
     if (empty($_SESSION['cart_guest'])) {
         echo json_encode([
             "success" => true,
@@ -19,23 +18,43 @@ if (!isset($_SESSION['user_id'])) {
         exit;
     }
 
-    // Tính tổng số lượng và tổng giá
-    $totalQuantity = 0;
+    $items = [];
     $totalPrice = 0;
+    $totalQuantity = 0;
 
-    foreach ($_SESSION['cart_guest'] as $product_id => $qty) {
-        // Không có DB → chỉ trả quantity, UI tự load sản phẩm sau
-        $totalQuantity += $qty;
+    foreach ($_SESSION['cart_guest'] as $product_id => $quantity) {
+
+        // Lấy info sản phẩm từ DB
+        $stmt = $pdo->prepare("SELECT name, price, image_main AS image FROM products WHERE product_id = ?");
+        $stmt->execute([$product_id]);
+        $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$product) continue;
+
+        $subtotal = $product['price'] * $quantity;
+
+        $items[] = [
+            "cart_item_id" => $product_id, // guest dùng product_id làm id tạm
+            "product_id" => $product_id,
+            "name" => $product['name'],
+            "price" => $product['price'],
+            "image" => $product['image'],
+            "quantity" => $quantity
+        ];
+
+        $totalPrice += $subtotal;
+        $totalQuantity += $quantity;
     }
 
     echo json_encode([
         "success" => true,
-        "cart" => [],         // guest không trả danh sách chi tiết
-        "totalPrice" => 0,    // giá tạm = 0 (UI không load product cho guest)
+        "cart" => $items,
+        "totalPrice" => $totalPrice,
         "totalQuantity" => $totalQuantity
     ]);
     exit;
 }
+
 
 
 // ===========================================
