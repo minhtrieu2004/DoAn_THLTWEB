@@ -30,7 +30,7 @@ $user_role = $is_logged_in ? ($_SESSION['role'] ?? 'user') : null;
         rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../assets/css/styles.css" rel="stylesheet" />
-    <!-- Main JavaScript for common functions -->
+    <!-- JavaScript chính cho các chức năng chung -->
     <script src="../assets/js/scripts.js"></script>
 </head>
 
