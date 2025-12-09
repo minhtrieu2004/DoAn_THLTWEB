@@ -221,3 +221,27 @@
     [password] => hqthien230804
 )
 
+[2025-12-09 03:43:24] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => 123456
+)
+
+[2025-12-09 03:43:49] ::1 METHOD=POST POST=Array
+(
+    [username] => shoptt_admin
+    [password] => 123456
+)
+
+[2025-12-09 03:43:57] ::1 METHOD=POST POST=Array
+(
+    [username] => user1
+    [password] => trieu2004
+)
+
+[2025-12-09 03:44:10] ::1 METHOD=POST POST=Array
+(
+    [username] => user1
+    [password] => trieu2004
+)
+
